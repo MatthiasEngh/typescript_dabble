@@ -1,0 +1,5 @@
+class UIElement {
+
+}
+
+export = UIElement

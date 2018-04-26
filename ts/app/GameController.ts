@@ -1,5 +1,8 @@
-class Controller {
+import UIElement = require("./ui/UIElement")
+
+export class GameController {
   random_number = 0
+  ui_element = new UIElement()
 
   draw() {
     console.log(this.random_number)
@@ -19,8 +22,3 @@ class Controller {
     requestAnimationFrame(this.main_loop)
   }
 }
-
-let controller = new Controller()
-controller.run()
-
-
