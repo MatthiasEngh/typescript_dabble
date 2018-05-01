@@ -1,10 +1,10 @@
 import UIElement = require("./ui/UIElement")
+import CanvasElement = require("./ui/CanvasElement")
 
 export class GameController {
   upNumber = 0
   rightNumber = 0
-  upElement = new UIElement(document.body)
-  rightElement = new UIElement(document.body)
+  mapElement = new CanvasElement(document.body)
 
   constructor() {
     this.initKeyListener()
@@ -20,23 +20,24 @@ export class GameController {
   }
 
   updateState(keyEvent: number) {
+    var speed = 10
+
     switch(keyEvent) {
       case 37:
-        this.rightNumber -= 1
+        this.rightNumber -= speed
         break
       case 38:
-        this.upNumber += 1
+        this.upNumber += speed
         break
       case 39:
-        this.rightNumber += 1
+        this.rightNumber += speed
         break
       case 40:
-        this.upNumber -= 1
+        this.upNumber -= speed
     }
   }
 
   updateVisuals() {
-    this.upElement.update(this.upNumber)
-    this.rightElement.update(this.rightNumber)
+    this.mapElement.update(this.upNumber, this.rightNumber)
   }
 }

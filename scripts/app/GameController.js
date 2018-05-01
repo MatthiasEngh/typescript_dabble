@@ -1,12 +1,11 @@
-define(["require", "exports", "./ui/UIElement"], function (require, exports, UIElement) {
+define(["require", "exports", "./ui/CanvasElement"], function (require, exports, CanvasElement) {
     "use strict";
     exports.__esModule = true;
     var GameController = /** @class */ (function () {
         function GameController() {
             this.upNumber = 0;
             this.rightNumber = 0;
-            this.upElement = new UIElement(document.body);
-            this.rightElement = new UIElement(document.body);
+            this.mapElement = new CanvasElement(document.body);
             this.initKeyListener();
             this.updateVisuals();
         }
@@ -18,23 +17,23 @@ define(["require", "exports", "./ui/UIElement"], function (require, exports, UIE
             });
         };
         GameController.prototype.updateState = function (keyEvent) {
+            var speed = 10;
             switch (keyEvent) {
                 case 37:
-                    this.rightNumber -= 1;
+                    this.rightNumber -= speed;
                     break;
                 case 38:
-                    this.upNumber += 1;
+                    this.upNumber += speed;
                     break;
                 case 39:
-                    this.rightNumber += 1;
+                    this.rightNumber += speed;
                     break;
                 case 40:
-                    this.upNumber -= 1;
+                    this.upNumber -= speed;
             }
         };
         GameController.prototype.updateVisuals = function () {
-            this.upElement.update(this.upNumber);
-            this.rightElement.update(this.rightNumber);
+            this.mapElement.update(this.upNumber, this.rightNumber);
         };
         return GameController;
     }());
