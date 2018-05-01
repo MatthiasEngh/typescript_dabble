@@ -1,24 +1,34 @@
 import UIElement = require("./ui/UIElement")
 
 export class GameController {
-  random_number = 0
-  ui_element = new UIElement(document.body)
+  keyEvent: number
+  uiElement = new UIElement(document.body)
 
-  draw() {
-    this.ui_element.update(this.random_number)
+  constructor() {
+    this.initKeyListener()
   }
 
-  main_loop = () => {
-    this.random_walk()
-    this.draw()
-    requestAnimationFrame(this.main_loop)
+  initKeyListener() {
+    var self = this
+    document.addEventListener("keydown", function(event) {
+      self.keyEvent = event.keyCode
+    })
   }
 
-  random_walk() {
-    this.random_number += Math.random() - 0.5
+  mainLoop = () => {
+    this.updateState()
+    this.updateVisuals()
+    requestAnimationFrame(this.mainLoop)
   }
 
   run() {
-    requestAnimationFrame(this.main_loop)
+    requestAnimationFrame(this.mainLoop)
+  }
+
+  updateState() {
+  }
+
+  updateVisuals() {
+    this.uiElement.update(this.keyEvent)
   }
 }

@@ -6,7 +6,12 @@ define(["require", "exports"], function (require, exports) {
             context.appendChild(this.element);
         }
         UIElement.prototype.update = function (content) {
-            this.element.innerHTML = content.toString();
+            if (!content) {
+                this.element.innerHTML = "no input";
+            }
+            else {
+                this.element.innerHTML = content.toString();
+            }
         };
         return UIElement;
     }());

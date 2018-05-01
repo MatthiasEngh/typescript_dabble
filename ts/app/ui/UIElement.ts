@@ -7,7 +7,11 @@ class UIElement {
   }
 
   update(content: number) {
-    this.element.innerHTML = content.toString()
+    if(!content) {
+      this.element.innerHTML = "no input"
+    } else {
+      this.element.innerHTML = content.toString()
+    }
   }
 }
 
