@@ -10,7 +10,6 @@ require(
     "GameController"
   ],
   (gameController) => {
-    var appMain = new gameController.GameController()
-    appMain.run()
+    new gameController.GameController()
   }
 )

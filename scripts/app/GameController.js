@@ -3,32 +3,22 @@ define(["require", "exports", "./ui/UIElement"], function (require, exports, UIE
     exports.__esModule = true;
     var GameController = /** @class */ (function () {
         function GameController() {
-            var _this = this;
             this.upNumber = 0;
             this.rightNumber = 0;
             this.upElement = new UIElement(document.body);
             this.rightElement = new UIElement(document.body);
-            this.mainLoop = function () {
-                _this.updateState();
-                _this.updateVisuals();
-                requestAnimationFrame(_this.mainLoop);
-            };
             this.initKeyListener();
+            this.updateVisuals();
         }
         GameController.prototype.initKeyListener = function () {
-            var self = this;
+            var controller = this;
             document.addEventListener("keydown", function (event) {
-                self.keyEvent = event.keyCode;
-            });
-            document.addEventListener("keyup", function (event) {
-                self.keyEvent = null;
+                controller.updateState(event.keyCode);
+                controller.updateVisuals();
             });
         };
-        GameController.prototype.run = function () {
-            requestAnimationFrame(this.mainLoop);
-        };
-        GameController.prototype.updateState = function () {
-            switch (this.keyEvent) {
+        GameController.prototype.updateState = function (keyEvent) {
+            switch (keyEvent) {
                 case 37:
                     this.rightNumber -= 1;
                     break;

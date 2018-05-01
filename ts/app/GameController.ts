@@ -1,7 +1,6 @@
 import UIElement = require("./ui/UIElement")
 
 export class GameController {
-  keyEvent: number
   upNumber = 0
   rightNumber = 0
   upElement = new UIElement(document.body)
@@ -9,30 +8,19 @@ export class GameController {
 
   constructor() {
     this.initKeyListener()
+    this.updateVisuals()
   }
 
   initKeyListener() {
-    var self = this
+    var controller = this
     document.addEventListener("keydown", function(event) {
-      self.keyEvent = event.keyCode
-    })
-    document.addEventListener("keyup", function(event) {
-      self.keyEvent = null
+      controller.updateState(event.keyCode)
+      controller.updateVisuals()
     })
   }
 
-  mainLoop = () => {
-    this.updateState()
-    this.updateVisuals()
-    requestAnimationFrame(this.mainLoop)
-  }
-
-  run() {
-    requestAnimationFrame(this.mainLoop)
-  }
-
-  updateState() {
-    switch(this.keyEvent) {
+  updateState(keyEvent: number) {
+    switch(keyEvent) {
       case 37:
         this.rightNumber -= 1
         break

@@ -7,6 +7,5 @@ require.config({
 require([
     "GameController"
 ], function (gameController) {
-    var appMain = new gameController.GameController();
-    appMain.run();
+    new gameController.GameController();
 });
