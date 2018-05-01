@@ -6,8 +6,8 @@ define(["require", "exports"], function (require, exports) {
             context.appendChild(this.element);
         }
         UIElement.prototype.update = function (content) {
-            if (!content) {
-                this.element.innerHTML = "no input";
+            if (content == null) {
+                this.element.innerHTML = "!";
             }
             else {
                 this.element.innerHTML = content.toString();
