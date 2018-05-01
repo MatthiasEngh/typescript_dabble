@@ -2,10 +2,10 @@ import UIElement = require("./ui/UIElement")
 
 export class GameController {
   random_number = 0
-  ui_element = new UIElement()
+  ui_element = new UIElement(document.body)
 
   draw() {
-    console.log(this.random_number)
+    this.ui_element.update(this.random_number)
   }
 
   main_loop = () => {

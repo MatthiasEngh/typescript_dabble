@@ -5,7 +5,7 @@ define(["require", "exports", "./ui/UIElement"], function (require, exports, UIE
         function GameController() {
             var _this = this;
             this.random_number = 0;
-            this.ui_element = new UIElement();
+            this.ui_element = new UIElement(document.body);
             this.main_loop = function () {
                 _this.random_walk();
                 _this.draw();
@@ -13,7 +13,7 @@ define(["require", "exports", "./ui/UIElement"], function (require, exports, UIE
             };
         }
         GameController.prototype.draw = function () {
-            console.log(this.random_number);
+            this.ui_element.update(this.random_number);
         };
         GameController.prototype.random_walk = function () {
             this.random_number += Math.random() - 0.5;
