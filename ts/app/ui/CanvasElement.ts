@@ -1,10 +1,12 @@
 class CanvasElement {
   background
+  canvasHeight = 300
+  canvasWidth = 500
   element
-  elementType = "CANVAS"
+  elementType = "canvas"
   leftOffset = 0
   topOffset = 0
-  TwoDContext
+  twoDContext
 
   constructor (context) {
     this.initBackground()
@@ -13,17 +15,30 @@ class CanvasElement {
   }
 
   initBackground () {
-    this.background = document.createElement("IMG")
-    this.background.setAttribute("src", "https://img00.deviantart.net/b355/i/2011/178/a/f/octocat_by_rstovall-d3k6a7n.jpg")
+    let mapTile = document.createElement("canvas")
+    mapTile.width = 50
+    mapTile.height = 50
+
+    let tileContext = mapTile.getContext("2d")
+    tileContext.fillStyle = "orange"
+    tileContext.fillRect(0,0,50,50)
+
+    this.background = document.createElement("canvas")
+    let backgroundContext = this.background.getContext("2d")
+    backgroundContext.drawImage(mapTile, 10, 10)
+    backgroundContext.drawImage(mapTile, 10, 70)
   }
 
   initCanvas (context) {
     this.element = document.createElement(this.elementType)
-    this.TwoDContext = this.element.getContext("2d")
+    this.element.width = this.canvasWidth
+    this.element.height = this.canvasHeight
+    this.twoDContext = this.element.getContext("2d")
   }
 
   draw() {
-    this.TwoDContext.drawImage(this.background, this.leftOffset, this.topOffset)
+    this.twoDContext.clearRect(0,0, this.canvasWidth, this.canvasHeight)
+    this.twoDContext.drawImage(this.background, this.leftOffset, this.topOffset)
   }
 
   update(topOffset: number, leftOffset: number) {

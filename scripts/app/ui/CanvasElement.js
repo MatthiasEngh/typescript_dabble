@@ -2,7 +2,9 @@ define(["require", "exports"], function (require, exports) {
     "use strict";
     var CanvasElement = /** @class */ (function () {
         function CanvasElement(context) {
-            this.elementType = "CANVAS";
+            this.canvasHeight = 300;
+            this.canvasWidth = 500;
+            this.elementType = "canvas";
             this.leftOffset = 0;
             this.topOffset = 0;
             this.initBackground();
@@ -10,15 +12,26 @@ define(["require", "exports"], function (require, exports) {
             context.appendChild(this.element);
         }
         CanvasElement.prototype.initBackground = function () {
-            this.background = document.createElement("IMG");
-            this.background.setAttribute("src", "https://img00.deviantart.net/b355/i/2011/178/a/f/octocat_by_rstovall-d3k6a7n.jpg");
+            var mapTile = document.createElement("canvas");
+            mapTile.width = 50;
+            mapTile.height = 50;
+            var tileContext = mapTile.getContext("2d");
+            tileContext.fillStyle = "orange";
+            tileContext.fillRect(0, 0, 50, 50);
+            this.background = document.createElement("canvas");
+            var backgroundContext = this.background.getContext("2d");
+            backgroundContext.drawImage(mapTile, 10, 10);
+            backgroundContext.drawImage(mapTile, 10, 70);
         };
         CanvasElement.prototype.initCanvas = function (context) {
             this.element = document.createElement(this.elementType);
-            this.TwoDContext = this.element.getContext("2d");
+            this.element.width = this.canvasWidth;
+            this.element.height = this.canvasHeight;
+            this.twoDContext = this.element.getContext("2d");
         };
         CanvasElement.prototype.draw = function () {
-            this.TwoDContext.drawImage(this.background, this.leftOffset, this.topOffset);
+            this.twoDContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+            this.twoDContext.drawImage(this.background, this.leftOffset, this.topOffset);
         };
         CanvasElement.prototype.update = function (topOffset, leftOffset) {
             this.topOffset = -topOffset;
