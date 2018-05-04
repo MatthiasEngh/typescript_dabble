@@ -25,8 +25,18 @@ class CanvasElement {
 
     this.background = document.createElement("canvas")
     let backgroundContext = this.background.getContext("2d")
-    backgroundContext.drawImage(mapTile, 10, 10)
-    backgroundContext.drawImage(mapTile, 10, 70)
+
+    backgroundContext.drawImage(mapTile, 0, 0)
+    backgroundContext.drawImage(mapTile, 60, 0)
+    backgroundContext.drawImage(mapTile, 120, 0)
+
+    backgroundContext.drawImage(mapTile, 30, 52)
+    backgroundContext.drawImage(mapTile, 90, 52)
+    backgroundContext.drawImage(mapTile, 150, 52)
+
+    backgroundContext.drawImage(mapTile, 0, 104)
+    backgroundContext.drawImage(mapTile, 60, 104)
+    backgroundContext.drawImage(mapTile, 120, 104)
   }
 
   initCanvas (context) {
