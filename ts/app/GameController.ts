@@ -20,7 +20,7 @@ export class GameController {
   }
 
   updateState(keyEvent: number) {
-    var speed = 10
+    var speed = -10
 
     switch(keyEvent) {
       case 37:

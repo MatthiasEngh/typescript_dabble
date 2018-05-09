@@ -1,7 +1,7 @@
 class CanvasElement {
   background
-  canvasHeight = 300
-  canvasWidth = 500
+  canvasHeight = 500
+  canvasWidth = 800
   element
   elementType = "canvas"
   leftOffset = 0
@@ -20,23 +20,23 @@ class CanvasElement {
     mapTile.height = 50
 
     let tileContext = mapTile.getContext("2d")
-    tileContext.fillStyle = "orange"
+    tileContext.fillStyle = "green"
     tileContext.fillRect(0,0,50,50)
 
     this.background = document.createElement("canvas")
+    this.background.width = 2000
+    this.background.height = 2000
     let backgroundContext = this.background.getContext("2d")
 
-    backgroundContext.drawImage(mapTile, 0, 0)
-    backgroundContext.drawImage(mapTile, 60, 0)
-    backgroundContext.drawImage(mapTile, 120, 0)
-
-    backgroundContext.drawImage(mapTile, 30, 52)
-    backgroundContext.drawImage(mapTile, 90, 52)
-    backgroundContext.drawImage(mapTile, 150, 52)
-
-    backgroundContext.drawImage(mapTile, 0, 104)
-    backgroundContext.drawImage(mapTile, 60, 104)
-    backgroundContext.drawImage(mapTile, 120, 104)
+    let rowNumber = 20
+    let columnNumber = 20
+    let coordinates
+    for (var i = 0;  i < rowNumber; i++) {
+      for (var j = 0; j < columnNumber; j++ ) {
+        coordinates = this.coordinates_by_indexes(i, j)
+        backgroundContext.drawImage(mapTile, coordinates[0], coordinates[1])
+      }
+    }
   }
 
   initCanvas (context) {
@@ -44,6 +44,12 @@ class CanvasElement {
     this.element.width = this.canvasWidth
     this.element.height = this.canvasHeight
     this.twoDContext = this.element.getContext("2d")
+  }
+
+  coordinates_by_indexes(rowIndex, columnIndex) {
+    let xCoordinate = columnIndex * 60 + (rowIndex % 2) * 30
+    let yCoordinate = rowIndex * 52
+    return [xCoordinate, yCoordinate]
   }
 
   draw() {
